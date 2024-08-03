@@ -8,6 +8,7 @@ if "page" not in st.session_state:
     st.session_state.page = "home"
 
 def main():
+    st.session_state.logged_in = False
     st.title("Hello World")
     st.subheader("Ashwin")
     
@@ -33,8 +34,6 @@ def main():
 if st.session_state.page == "home":
     main()
 elif st.session_state.page == "login_register":
-    from pages import login_register
-    login_register.login_register()
+    st.switch_page("pages/login_register.py")
 elif st.session_state.page == "chat":
-    from pages import chat
-    chat.chat()
+    st.switch_page("pages/chat.py")

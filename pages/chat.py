@@ -5,14 +5,20 @@ import random
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
+st.session_state.num_messages = 0
+
 # Streamlit app
 def chat():
-    if not st.session_state.logged_in:
-        st.write("Please log in to access the chat.")
-        if st.button("Back to Home"):
-            st.session_state.page = "home"
-            st.rerun()
-        st.stop()
+    try:
+        if not st.session_state.logged_in:
+            st.write("Please log in to access the chat.")
+            if st.button("Back to Home"):
+                st.session_state.page = "home"
+                st.switch_page("main.py")
+                # st.rerun() Code is unreachable
+            st.stop()
+    except Exception as e:
+        pass
 
     st.title(f"Chat with AI")
 
@@ -27,6 +33,7 @@ def chat():
     if st.button("Send"):
         if message:
             # Append the user's message to the chat history
+            st.session_state.chat_history.append(f"{st.session_state.num_messages}: {""}")
             st.session_state.chat_history.append(f"{st.session_state.username}: {message}")
             # Respond with a random number and append to the chat history
             response = random.randint(1, 100)
