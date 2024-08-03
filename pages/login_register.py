@@ -79,6 +79,9 @@ def login_register():
                     st.rerun()
                 else:
                     st.error("Invalid username or password")
+    else:
+        st.write(f"Welcome, {st.session_state.username}!")
+        
                 
     if st.button("Back to Home"):
         st.session_state.page = "home"

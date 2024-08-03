@@ -37,3 +37,5 @@ elif st.session_state.page == "login_register":
     st.switch_page("pages/login_register.py")
 elif st.session_state.page == "chat":
     st.switch_page("pages/chat.py")
+else:
+    st.error("Invalid page state")

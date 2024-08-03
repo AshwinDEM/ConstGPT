@@ -1,6 +1,10 @@
 import streamlit as st
 import random
 
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+    st.session_state.username = ""
+
 # Initialize session state variables
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
