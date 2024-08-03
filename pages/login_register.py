@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import os
+from time import sleep
+
+st.set_page_config(page_title="Login/Register", layout="centered")
 
 # Path to the users CSV file
 USER_FILE_PATH = "./users/users.csv"
@@ -58,10 +61,17 @@ def login_register():
                 elif new_password != confirm_password:
                     st.error("Passwords do not match")
                 else:
-                    add_user(new_username, new_password)
                     st.success("Registered successfully! Please log in.")
+                    add_user(new_username, new_password)
+                    # sleep(2)
+                    # st.switch_page("pages/login_register.py")
                     st.session_state.registering = False
                     try:
+                        ''' Despite the fact that this will throw an Exception every time,
+                        since this is not experimental anymore, however rerun does not work
+                        and switch_page does not work, for some damn reason only for st.success,
+                        works fine for st.error and st.warning, so I have to use the following
+                        '''
                         st.experimental_rerun()
                     except AttributeError as e:
                         pass
@@ -76,6 +86,7 @@ def login_register():
                     st.session_state.logged_in = True
                     st.session_state.username = username
                     st.session_state.page = "chat"
+                    st.switch_page("pages/chat.py")
                     st.rerun()
                 else:
                     st.error("Invalid username or password")

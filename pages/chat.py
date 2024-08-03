@@ -1,9 +1,14 @@
 import streamlit as st
 import random
 
+st.set_page_config(page_title="Chat", layout="centered")
+
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.username = ""
+
+if "page" not in st.session_state:
+    st.session_state.page = "chat"
 
 # Initialize session state variables
 if "chat_history" not in st.session_state:
@@ -19,35 +24,60 @@ def chat():
             if st.button("Back to Home"):
                 st.session_state.page = "home"
                 st.switch_page("main.py")
-                # st.rerun() Code is unreachable
-            st.stop()
+                
+                st.rerun()
+            
     except Exception as e:
         pass
 
-    st.title(f"Chat with AI")
+    if st.session_state.page == "chat":
+        st.title(f"AI Bot")
 
-    # Display chat history
-    st.header("Chat History")
-    for chat_message in st.session_state.chat_history:
-        st.write(chat_message)
+        # Display chat history
+        st.header("Chat History")
+        for chat_message in st.session_state.chat_history:
+            pass
+            # st.write(chat_message)
 
-    # Input message and send button
-    message = st.text_input("Your Message")
-    
-    if st.button("Send"):
-        if message:
-            # Append the user's message to the chat history
-            st.session_state.chat_history.append(f"{st.session_state.num_messages}: {""}")
-            st.session_state.chat_history.append(f"{st.session_state.username}: {message}")
-            # Respond with a random number and append to the chat history
-            response = random.randint(1, 100)
-            st.session_state.chat_history.append(f"Response: {response}")
+        for message in st.session_state.chat_history:
+            with st.chat_message(message["role"]):
+                pass
+                st.markdown(message["content"])
+
+        if prompt := st.chat_input("What is up?"):
+        # Display user message in chat message container
+            st.chat_message("user").markdown(prompt)
+            # Add user message to chat history
+            st.session_state.chat_history.append({"role": "user", "content": prompt})
+
+            response = f"Echo: {prompt}"
+            # Display assistant response in chat message container
+            with st.chat_message("assistant"):
+                st.markdown(response)
+            # Add assistant response to chat history
+            st.session_state.chat_history.append({"role": "assistant", "content": response})
+
+        # # Input message and send button
+        # message = st.text_input("Your Message")
+        
+        # if st.button("Send"):
+        #     if message:
+        #         # Append the user's message to the chat history
+        #         st.session_state.chat_history.append(f"{st.session_state.num_messages}: {""}")
+        #         st.session_state.chat_history.append(f"{st.session_state.username}: {message}")
+        #         # Respond with a random number and append to the chat history
+        #         response = random.randint(1, 100)
+        #         st.session_state.chat_history.append(f"Response: {response}")
+        #         st.rerun()
+
+
+
+        if st.button("Logout"):
+            st.session_state.logged_in = False
+            st.session_state.page = "home"
             st.rerun()
-
-    if st.button("Logout"):
-        st.session_state.logged_in = False
-        st.session_state.page = "home"
-        st.rerun()
+    else:
+        st.switch_page("main.py")
 
 if __name__ == "__main__":
     chat()

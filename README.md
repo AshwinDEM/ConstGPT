@@ -10,7 +10,6 @@ GPTFeed is an experimental project aimed at improving language models by incorpo
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Features
@@ -22,7 +21,6 @@ GPTFeed is an experimental project aimed at improving language models by incorpo
 - **Scalability**: Capable of handling a large number of requests simultaneously.
 - **Security**: Implements robust security measures to protect user data.
 - **Performance Metrics**: High accuracy and fast response times.
-- **API Access**: Provides APIs for easy integration with other applications.
 - **User Interface**: Intuitive and user-friendly interface for easy interaction.
 - **Documentation**: Comprehensive documentation available for developers.
 
@@ -46,13 +44,13 @@ To get started with GPTFeed, follow these steps:
 
 ## Usage
 
-To use Mercury, follow these steps:
+To use GPTFeed, follow these steps:
 
 1. Run the application:
     ```sh
     streamlit run streamlit_app.py
     ```
-2. Follow the on-screen instructions to input your MBTI type and find friends with similar personality traits.
+2. Follow the on-screen instructions to register/login and then access the model.
 
 
 ## Contributing
@@ -73,10 +71,6 @@ We welcome contributions! Please follow these steps to contribute:
     git push origin feature-branch
     ```
 5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
 
