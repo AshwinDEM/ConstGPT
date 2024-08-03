@@ -61,7 +61,12 @@ def login_register():
                     add_user(new_username, new_password)
                     st.success("Registered successfully! Please log in.")
                     st.session_state.registering = False
-                    st.rerun()
+                    try:
+                        st.experimental_rerun()
+                    except AttributeError as e:
+                        pass
+
+                    
         else:
             st.header("Login")
             username = st.text_input("Username")

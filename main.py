@@ -11,19 +11,24 @@ def main():
     st.title("Hello World")
     st.subheader("Ashwin")
     
-    col1, col2 = st.columns(2)
+    # col1, col2 = st.columns(2)
     
-    with col1:
-        if st.button("Login"):
-            st.session_state.page = "login_register"
-            st.session_state.registering = False
-            st.rerun()
+    # with col1:
+    #     if st.button("Login"):
+    #         st.session_state.page = "login_register"
+    #         st.session_state.registering = False
+    #         st.rerun()
     
-    with col2:
-        if st.button("Register"):
-            st.session_state.page = "login_register"
-            st.session_state.registering = True
-            st.rerun()
+    # with col2:
+    #     if st.button("Register"):
+    #         st.session_state.page = "login_register"
+    #         st.session_state.registering = True
+    #         st.rerun()
+
+    if st.button("Login/Register"):
+        st.session_state.page = "login_register"
+        st.session_state.registering = False
+        st.rerun()
 
 if st.session_state.page == "home":
     main()

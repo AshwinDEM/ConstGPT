@@ -14,7 +14,7 @@ def chat():
             st.rerun()
         st.stop()
 
-    st.title(f"Chat with {st.session_state.username}")
+    st.title(f"Chat with AI")
 
     # Display chat history
     st.header("Chat History")
