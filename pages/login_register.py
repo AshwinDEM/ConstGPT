@@ -5,30 +5,28 @@ from time import sleep
 
 st.set_page_config(page_title="Login/Register", layout="centered")
 
-# Path to the users CSV file
 USER_FILE_PATH = "./users/users.csv"
 
-# Initialize session state variables
 if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.username = ""
     st.session_state.registering = False
 
-# Function to read users from CSV
+
 def read_users():
     if os.path.exists(USER_FILE_PATH):
         return pd.read_csv(USER_FILE_PATH)
     else:
         return pd.DataFrame(columns=["username", "password"])
 
-# Function to add a user to the CSV
+
 def add_user(username, password):
     users_df = read_users()
     new_user = pd.DataFrame({"username": [username], "password": [password]})
     users_df = pd.concat([users_df, new_user], ignore_index=True)
     users_df.to_csv(USER_FILE_PATH, index=False)
 
-# User authentication function
+
 def login(username, password):
     users_df = read_users()
     if not users_df.empty:
@@ -37,11 +35,10 @@ def login(username, password):
             return True
     return False
 
-# Streamlit app
+
 def login_register():
     st.title("Login / Register")
 
-    # Dropdown to select Login or Register
     action = st.selectbox("Select Action", ["Login", "Register"])
 
     if action == "Register":

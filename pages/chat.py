@@ -10,13 +10,11 @@ if "logged_in" not in st.session_state:
 if "page" not in st.session_state:
     st.session_state.page = "chat"
 
-# Initialize session state variables
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 st.session_state.num_messages = 0
 
-# Streamlit app
 def chat():
     try:
         if not st.session_state.logged_in:
@@ -33,7 +31,6 @@ def chat():
     if st.session_state.page == "chat":
         st.title(f"AI Bot")
 
-        # Display chat history
         st.header("Chat History")
         for chat_message in st.session_state.chat_history:
             pass
@@ -45,19 +42,14 @@ def chat():
                 st.markdown(message["content"])
 
         if prompt := st.chat_input("What is up?"):
-        # Display user message in chat message container
             st.chat_message("user").markdown(prompt)
-            # Add user message to chat history
             st.session_state.chat_history.append({"role": "user", "content": prompt})
 
-            response = f"Echo: {prompt}"
-            # Display assistant response in chat message container
+            response = f"{prompt}"
             with st.chat_message("assistant"):
                 st.markdown(response)
-            # Add assistant response to chat history
             st.session_state.chat_history.append({"role": "assistant", "content": response})
 
-        # # Input message and send button
         # message = st.text_input("Your Message")
         
         # if st.button("Send"):
