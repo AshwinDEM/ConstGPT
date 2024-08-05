@@ -57,7 +57,6 @@ def main():
         """, 
         unsafe_allow_html=True
     )
-    # st.subheader("Ashwin")
 
     button = st.button("Login/Register")
     if button:

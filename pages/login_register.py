@@ -64,11 +64,12 @@ def login_register():
                     # st.switch_page("pages/login_register.py")
                     st.session_state.registering = False
                     try:
-                        ''' Despite the fact that this will throw an Exception every time,
-                        (since this is not experimental anymore), however rerun does not work
-                        and switch_page does not work, for some damn reason only for st.success,
-                        works fine for st.error and st.warning, so I have to use the following
-                        '''
+                        # Despite the fact that this will throw an Exception every time,
+                        # (since this is not experimental anymore), however rerun does not work
+                        # and switch_page does not work, for some damn reason only for st.success,
+                        # works fine for st.error and st.warning, so I have to use the following
+                        # workaround to make the page show the success, and then reload, instead
+                        # of just reloading the page.
                         st.experimental_rerun()
                     except AttributeError as e:
                         pass
@@ -84,12 +85,10 @@ def login_register():
                     st.session_state.username = username
                     st.session_state.page = "chat"
                     st.switch_page("pages/chat.py")
-                    st.rerun()
                 else:
                     st.error("Invalid username or password")
     else:
         st.write(f"Welcome, {st.session_state.username}!")
-        
                 
     if st.button("Back to Home"):
         st.session_state.page = "home"

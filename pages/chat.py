@@ -13,6 +13,16 @@ if "page" not in st.session_state:
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
+if "chat_user" not in st.session_state:
+    st.session_state.chat_user = ""
+
+# If a user logs out, clear the chat history
+# Otherwise, the chat history will be retained between users
+if st.session_state.username != st.session_state.chat_user:
+    st.session_state.chat_history = []
+
+st.session_state.chat_user = st.session_state.username
+
 st.session_state.num_messages = 0
 
 def chat():
@@ -22,8 +32,6 @@ def chat():
             if st.button("Back to Home"):
                 st.session_state.page = "home"
                 st.switch_page("main.py")
-                
-                st.rerun()
             
     except Exception as e:
         pass
