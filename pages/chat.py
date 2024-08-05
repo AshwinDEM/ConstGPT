@@ -50,20 +50,6 @@ def chat():
                 st.markdown(response)
             st.session_state.chat_history.append({"role": "assistant", "content": response})
 
-        # message = st.text_input("Your Message")
-        
-        # if st.button("Send"):
-        #     if message:
-        #         # Append the user's message to the chat history
-        #         st.session_state.chat_history.append(f"{st.session_state.num_messages}: {""}")
-        #         st.session_state.chat_history.append(f"{st.session_state.username}: {message}")
-        #         # Respond with a random number and append to the chat history
-        #         response = random.randint(1, 100)
-        #         st.session_state.chat_history.append(f"Response: {response}")
-        #         st.rerun()
-
-
-
         if st.button("Logout"):
             st.session_state.logged_in = False
             st.session_state.page = "home"

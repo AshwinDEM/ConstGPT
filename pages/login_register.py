@@ -65,7 +65,7 @@ def login_register():
                     st.session_state.registering = False
                     try:
                         ''' Despite the fact that this will throw an Exception every time,
-                        since this is not experimental anymore, however rerun does not work
+                        (since this is not experimental anymore), however rerun does not work
                         and switch_page does not work, for some damn reason only for st.success,
                         works fine for st.error and st.warning, so I have to use the following
                         '''
