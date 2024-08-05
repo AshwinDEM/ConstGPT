@@ -67,8 +67,8 @@ def main():
 if st.session_state.page == "home":
     main()
 elif st.session_state.page == "login_register":
-    st.switch_page("pages/login_register.py")
+    st.switch_page("pages//1_🔐_Login&Register.py")
 elif st.session_state.page == "chat":
-    st.switch_page("pages/chat.py")
+    st.switch_page("pages/2_💭_Chat.py")
 else:
     st.error("Invalid page state")

@@ -84,7 +84,7 @@ def login_register():
                     st.session_state.logged_in = True
                     st.session_state.username = username
                     st.session_state.page = "chat"
-                    st.switch_page("pages/chat.py")
+                    st.switch_page("pages/2_💭_Chat.py")
                 else:
                     st.error("Invalid username or password")
     else:
