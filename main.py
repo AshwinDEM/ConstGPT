@@ -20,7 +20,7 @@ st.markdown(
         font-size: 5em;
         flex-direction: column;
         font-weight: bold;
-        
+        text-indent: -60px;
     }
     .transparent-ruct {
         opacity: 0.3;
@@ -58,11 +58,16 @@ def main():
         unsafe_allow_html=True
     )
 
-    button = st.button("Login/Register")
-    if button:
-        st.session_state.page = "login_register"
-        st.session_state.registering = False
-        st.rerun()
+    #Create 5 columns and place the button in the middle column
+    # So that it is centered
+    col1, col2, col3, col4, col5 = st.columns([1, 1, 2, 1, 1])
+
+    with col3:
+        button = st.button("Login/Register")
+        if button:
+            st.session_state.page = "login_register"
+            st.session_state.registering = False
+            st.rerun()
 
 if st.session_state.page == "home":
     main()
