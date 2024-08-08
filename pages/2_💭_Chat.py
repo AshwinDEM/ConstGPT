@@ -1,5 +1,6 @@
 import streamlit as st
-import random
+from dotenv import load_dotenv
+import os
 
 st.set_page_config(page_title="Chat", layout="centered")
 
@@ -32,36 +33,47 @@ def chat():
             if st.button("Back to Home"):
                 st.session_state.page = "home"
                 st.switch_page("main.py")
-            
+            return  # Exit early if not logged in
+
     except Exception as e:
-        pass
+        st.error(f"An error occurred: {e}")
 
     if st.session_state.page == "chat":
-        st.title(f"AI Bot")
+        # Create columns
+        col1, col2 = st.columns([3, 1])  # Adjust column ratios as needed
 
-        st.header("Chat History")
-        for chat_message in st.session_state.chat_history:
-            pass
-            # st.write(chat_message)
+        slider1 = slider2 = slider3 = 0
+        with col2:
+            st.header("Settings")
+            slider1 = st.slider("Length", 0, 10, 5, 1)
+            slider2 = st.slider("Variation", 0, 10, 5, 1)
+            slider3 = st.slider("Conciseness", 0, 10, 5, 1)
+            # For debugging purposes
+            # st.write(f"Slider 1 value: {slider1}")
+            # st.write(f"Slider 2 value: {slider2}")
+            # st.write(f"Slider 3 value: {slider3}")
 
-        for message in st.session_state.chat_history:
-            with st.chat_message(message["role"]):
-                pass
-                st.markdown(message["content"])
+        with col1:
+            st.title("AI Bot")
+            st.header("Chat History")
+            for message in st.session_state.chat_history:
+                with st.chat_message(message["role"]):
+                    st.markdown(message["content"])
 
-        if prompt := st.chat_input("What is up?"):
-            st.chat_message("user").markdown(prompt)
-            st.session_state.chat_history.append({"role": "user", "content": prompt})
+            if prompt := st.chat_input("What is up?"):
+                st.chat_message("user").markdown(prompt)
+                st.session_state.chat_history.append({"role": "user", "content": prompt})
 
-            response = f"{prompt}"
-            with st.chat_message("assistant"):
-                st.markdown(response)
-            st.session_state.chat_history.append({"role": "assistant", "content": response})
+                response = f"{prompt}"
+                with st.chat_message("assistant"):
+                    st.markdown(response)
+                st.session_state.chat_history.append({"role": "assistant", "content": response})
+                st.rerun()
 
-        if st.button("Logout"):
-            st.session_state.logged_in = False
-            st.session_state.page = "home"
-            st.rerun()
+            if st.button("Logout"):
+                st.session_state.logged_in = False
+                st.session_state.page = "home"
+                st.rerun()
     else:
         st.switch_page("main.py")
 

@@ -5,3 +5,4 @@ transformers
 streamlit
 datasets
 accelerate
+python-dotenv
