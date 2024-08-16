@@ -6,3 +6,4 @@ streamlit==1.37.0
 torch==2.3.0+cu121
 transformers==4.41.2
 requests==2.32.3
+flask==3.0.3

@@ -1,7 +1,8 @@
 import streamlit as st
+import requests
 from dotenv import load_dotenv
 import os
-from models.model import load_model, generate_text  # Import the load_model and generate_text functions
+import subprocess
 
 st.set_page_config(page_title="Chat", layout="centered")
 
@@ -27,6 +28,13 @@ st.session_state.chat_user = st.session_state.username
 
 st.session_state.num_messages = 0
 
+# Replace with your actual server URL
+FLASK_SERVER_URL = "http://localhost:5000"
+
+def get_response_from_flask(question):
+    response = requests.post(f"{FLASK_SERVER_URL}/ask", json={"question": question})
+    return response.json().get("answer", "No answer received")
+
 def chat():
     try:
         if not st.session_state.logged_in:
@@ -34,18 +42,13 @@ def chat():
             if st.button("Back to Home"):
                 st.session_state.page = "home"
                 st.switch_page("main.py")
-            return  # Exit early if not logged in
+            return
 
     except Exception as e:
         st.error(f"An error occurred: {e}")
 
     if st.session_state.page == "chat":
-        # Display loading message
-        with st.spinner("Loading the model..."):
-            tokenizer, model = load_model("gpt2")
-
-        # Create columns
-        col1, col2 = st.columns([3, 1])  # Adjust column ratios as needed
+        col1, col2 = st.columns([3, 1])
 
         slider1 = slider2 = slider3 = 0
         with col2:
@@ -65,9 +68,8 @@ def chat():
                 st.chat_message("user").markdown(prompt)
                 st.session_state.chat_history.append({"role": "user", "content": prompt})
 
-                # Generate a response using the GPT-2 model
                 with st.spinner("Awaiting response..."):
-                    response = generate_text(tokenizer, model, prompt, max_length=100, temperature=0.7, top_p=0.9, repetition_penalty=1.2)
+                    response = get_response_from_flask(prompt)
                 with st.chat_message("assistant"):
                     st.markdown(response)
                 st.session_state.chat_history.append({"role": "assistant", "content": response})
