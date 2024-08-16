@@ -1,6 +1,7 @@
 import streamlit as st
 from dotenv import load_dotenv
 import os
+from models.model import load_model, generate_text  # Import the load_model and generate_text functions
 
 st.set_page_config(page_title="Chat", layout="centered")
 
@@ -39,6 +40,10 @@ def chat():
         st.error(f"An error occurred: {e}")
 
     if st.session_state.page == "chat":
+        # Display loading message
+        with st.spinner("Loading the model..."):
+            tokenizer, model = load_model("gpt2")
+
         # Create columns
         col1, col2 = st.columns([3, 1])  # Adjust column ratios as needed
 
@@ -48,10 +53,6 @@ def chat():
             slider1 = st.slider("Length", 0, 10, 5, 1)
             slider2 = st.slider("Variation", 0, 10, 5, 1)
             slider3 = st.slider("Conciseness", 0, 10, 5, 1)
-            # For debugging purposes
-            # st.write(f"Slider 1 value: {slider1}")
-            # st.write(f"Slider 2 value: {slider2}")
-            # st.write(f"Slider 3 value: {slider3}")
 
         with col1:
             st.title("AI Bot")
@@ -64,7 +65,9 @@ def chat():
                 st.chat_message("user").markdown(prompt)
                 st.session_state.chat_history.append({"role": "user", "content": prompt})
 
-                response = f"{prompt}"
+                # Generate a response using the GPT-2 model
+                with st.spinner("Awaiting response..."):
+                    response = generate_text(tokenizer, model, prompt, max_length=100, temperature=0.7, top_p=0.9, repetition_penalty=1.2)
                 with st.chat_message("assistant"):
                     st.markdown(response)
                 st.session_state.chat_history.append({"role": "assistant", "content": response})

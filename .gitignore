@@ -162,7 +162,7 @@ cython_debug/
 *.zip
 
 # Hide the models folder
-models/
+models/sciqa-bert
 
 
 # PyCharm

@@ -1,8 +1,8 @@
-torch
-torchvision
-torchaudio
-transformers
-streamlit
-datasets
-accelerate
-python-dotenv
+accelerate==0.33.0
+datasets==2.20.0
+pandas==2.2.2
+python-dotenv==1.0.1
+streamlit==1.37.0
+torch==2.3.0+cu121
+transformers==4.41.2
+requests==2.32.3
