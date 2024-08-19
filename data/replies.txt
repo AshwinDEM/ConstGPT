@@ -1,0 +1,4 @@
+Q:What is the boiling point of water?
+A:<s>[INST] What is the boiling point of water? [/INST]
+ Boiling point of water. (credit: modification of work by “Dave”/Flickr).
+The boiling point of water is 100°C. The boiling point of water is the temperature at which the water changes from a liquid to a gas. The boiling point of water is 100°C. The boiling point of water is the temperature at which the water changes from a liquid to a gas

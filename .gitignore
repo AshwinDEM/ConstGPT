@@ -122,6 +122,10 @@ __pypackages__/
 celerybeat-schedule
 celerybeat.pid
 
+test/
+
+images/
+
 # SageMath parsed files
 *.sage.py
 
@@ -162,7 +166,7 @@ cython_debug/
 *.zip
 
 # Hide the models folder
-models/sciqa-bert
+models/
 
 
 # PyCharm

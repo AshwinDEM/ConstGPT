@@ -9,6 +9,9 @@ if "logged_in" not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.username = ""
 
+if "pipe" not in st.session_state:
+    st.session_state.pipe = 0
+
 st.markdown(
     """
     <style>
